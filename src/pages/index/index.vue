@@ -1,125 +1,63 @@
 <template>
-  <div @click="clickHandle">
-
-    <div class="userinfo" @click="bindViewTap">
-      <img class="userinfo-avatar" v-if="userInfo.avatarUrl" :src="userInfo.avatarUrl" background-size="cover" />
-      <img class="userinfo-avatar" src="/static/images/user.png" background-size="cover" />
-
-      <div class="userinfo-nickname">
-        <card :text="userInfo.nickName"></card>
+  <div>
+    <!-- 搜索 -->
+    <div class="search">
+      <!-- 搜索框 -->
+      <div class="input-box">
+        <input type="text" >
       </div>
+      <!-- 搜索结果 -->
+      <div class="input-res"></div>
     </div>
 
-    <div class="usermotto">
-      <div class="user-motto">
-        <card :text="motto"></card>
-      </div>
-    </div>
-
-    <form class="form-container">
-      <input type="text" class="form-control" :value="motto" placeholder="v-model" />
-      <input type="text" class="form-control" v-model="motto" placeholder="v-model" />
-      <input type="text" class="form-control" v-model.lazy="motto" placeholder="v-model.lazy" />
-    </form>
-
-
-    <div class="all">
-        <div class="left">
-        </div>
-        <div class="right">
-        </div>
-    </div>
+    <!-- 焦点图 -->
+    <swiper class="banner" indicator-dots indicator-color="rgba(255, 255, 255, 0.6)" indicator-active-color="#fff">
+      <swiper-item>
+        <navigator url="">
+          <image src="/static/uploads/banner1.png"></image>
+        </navigator>
+      </swiper-item>
+      <swiper-item>
+        <navigator url="">
+          <image src="/static/uploads/banner2.png"></image>
+        </navigator>
+      </swiper-item>
+      <swiper-item>
+        <navigator url="">
+          <image src="/static/uploads/banner3.png"></image>
+        </navigator>
+      </swiper-item>
+    </swiper>
   </div>
 </template>
 
 <script>
-import card from '@/components/card'
 
-export default {
-  data () {
-    return {
-      motto: 'Hello miniprograme',
-      userInfo: {
-        nickName: 'mpvue',
-        avatarUrl: 'http://mpvue.com/assets/logo.png'
-      }
-    }
-  },
-
-  components: {
-    card
-  },
-
-  methods: {
-    bindViewTap () {
-      const url = '../logs/main'
-      if (mpvuePlatform === 'wx') {
-        mpvue.switchTab({ url })
-      } else {
-        mpvue.navigateTo({ url })
-      }
-    },
-    clickHandle (ev) {
-      console.log('clickHandle:', ev)
-      // throw {message: 'custom test'}
-    }
-  },
-
-  created () {
-    // let app = getApp()
-  }
-}
 </script>
 
 <style scoped>
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* 搜索 */
+.search .input-box {
+  background-color: #ea4451;
+  padding: 20rpx 30rpx;
+}
+.search .input-box input {
+  height: 60px;
+  font-size: 27rpx;
+  background-color: #fff;
+  border-radius: 8rpx;
+  padding-left: 15rpx;
+  color: #666;
 }
 
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
+/* 焦点图 */
+.banner {
+  width: 750rpx;
+  height: 340rpx;
 }
 
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.usermotto {
-  margin-top: 150px;
-}
-
-.form-control {
-  display: block;
-  padding: 0 12px;
-  margin-bottom: 5px;
-  border: 1px solid #ccc;
-}
-.all{
-  width:7.5rem;
-  height:1rem;
-  background-color:blue;
-}
-.all:after{
-  display:block;
-  content:'';
-  clear:both;
-}
-.left{
-  float:left;
-  width:3rem;
-  height:1rem;
-  background-color:red;
-}
-
-.right{
-  float:left;
-  width:4.5rem;
-  height:1rem;
-  background-color:green;
+.banner navigator {
+  width: 100%;
+  height: 100%;
 }
 </style>
